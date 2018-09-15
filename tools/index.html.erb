@@ -47,6 +47,7 @@
           var key = $(elem).attr('id');
           if(Cookies.get(key) == 'true' ) {
             $(elem).prop('checked', true);
+            $(elem).parent().parent().addClass("done");
           }
         });
       });

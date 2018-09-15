@@ -1,0 +1,20 @@
+<%# encoding: UTF-8 %><!DOCTYPE html>
+<html>
+  <head>
+    <title><%= start %>~の紋章キャンペーンやった？</title>
+  </head>
+  <body>
+    <div>
+      <%= start %>~の紋章キャンペーンやった？
+    </div>
+    <div>
+      <table>
+        <tr>
+          <%- goals.each do |goal| -%>
+          <td></td><td><%= goal[0] %></td><td><%= goal[1] %></td><td><%= goal[2] %></td>
+          <%- end -%>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

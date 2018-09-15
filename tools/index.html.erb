@@ -5,35 +5,40 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@1.0.0/build/pure-min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <style>
+      div.content-wrapper { padding: 10%; } 
+    </style>
   </head>
   <body>
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <p><%= start %>の紋章キャンペーンやった？</p>
+    <div class="content-wrapper">
+      <div class="pure-g">
+        <div class="pure-u-1">
+          <p><%= start %>の紋章キャンペーンやった？</p>
+        </div>
+      </div>
+      <div class="pure-g">
+        <div class="pure-u-1">
+          <table class="pure-table pure-table-horizontal">
+            <tbody>
+              <%- goals.each_with_index do |goal, idx| -%>
+              <tr>
+                <td><input type="checkbox" id="<%= start %>-<%= idx %>"></td><td><%= goal[0] %></td><td><%= goal[1] %></td><td><%= goal[2] %></td>
+              </tr>
+              <%- end -%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pure-g">
+        <div class="pure-u-1">
+          <p><a href="<%= url %>"><%= url %></a> から<%= now %>に生成しました。</p>
+          <p>Cookieを利用して結果を保存しています。</p>
+          <%- if auto -%>
+          <p>自動生成した結果を表示しています。何かおかしければ @wataken44 まで。</p>
+          <%- end -%>
+        </div>
       </div>
     </div>
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <table class="pure-table pure-table-horizontal">
-          <tbody>
-            <%- goals.each do |goal| -%>
-            <tr>
-              <td></td><td><%= goal[0] %></td><td><%= goal[1] %></td><td><%= goal[2] %></td>
-            </tr>
-            <%- end -%>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <p><a href="<%= url %>"><%= url %></a> から<%= now %>に生成しました。</p>
-        <p>Cookieを利用して結果を保存しています。</p>
-        <%- if auto -%>
-        <p>自動生成した結果を表示しています。何かおかしければ @wataken44 まで。</p>
-        <%- end -%>
-      </div>
-    </div>
-
   </body>
 </html>

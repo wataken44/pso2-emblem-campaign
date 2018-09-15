@@ -81,6 +81,10 @@ def is_updated(start, goals, url)
         if start != js["start"] || goals != js["goals"] || url != js["url"]
             ret = true
         end
+
+        p [start, js["start"], start==js["start"]]
+        p [goals, js["goals"], goals==js["goals"]]
+        p [url, js["url"], url==js["url"]]
     end
 
     data = {

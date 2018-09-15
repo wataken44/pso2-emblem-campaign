@@ -1,11 +1,11 @@
 <%# encoding: UTF-8 %><!DOCTYPE html>
 <html>
   <head>
-    <title><%= start %>~の紋章キャンペーンやった？</title>
+    <title><%= start %>の紋章キャンペーンやった？</title>
   </head>
   <body>
     <div>
-      <%= start %>~の紋章キャンペーンやった？
+      <%= start %>の紋章キャンペーンやった？
     </div>
     <div>
       <table>
@@ -16,5 +16,13 @@
         </tr>
       </table>
     </div>
+    <div>
+      <p><a href="<%= url %>"><%= url %></a> から<%= now %>に生成しました。</p>
+      <p>Cookieを利用して結果を保存しています。</p>
+      <%- if auto -%>
+      <p>自動生成した結果を表示しています。何かおかしければ @wataken44 まで。</p>
+      <%- end -%>
+    </div>
+
   </body>
 </html>

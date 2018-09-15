@@ -60,6 +60,8 @@ def render_html(start, goals, auto, url)
 
     template = ERB.new(template_str, nil, "-")
     template.filename = tfn
+
+    now = DateTime.now.to_s
     
     ofp1 = open(base_dir + "index.html", "w")
     ofp1.write(template.result(binding))

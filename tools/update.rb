@@ -66,6 +66,11 @@ def render_html(start, goals, auto, url)
     ofp1 = open(base_dir + "index.html", "w")
     ofp1.write(template.result(binding))
     ofp1.close
+
+    ofp2 = open(base_dir + ("archive/%s.html" % start), "w")
+    ofp2.write(template.result(binding))
+    ofp2.close
+
 end
 
 if __FILE__ == $0 then

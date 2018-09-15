@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
     <style>
-      div.content-wrapper { padding: 10%; } 
+      div.content-wrapper { padding: 5%; } 
     </style>
   </head>
   <body>
@@ -40,5 +40,20 @@
         </div>
       </div>
     </div>
+    <script>
+      $(document).ready(function() {
+        $("input[type=checkbox]").each(function(index, elem){
+          var key = $(elem).id;
+          if(Cookies.get(key) == 'true' ) {
+            $(elem).prop('checked', true);
+          }
+        });
+      });
+
+      $("input[type=checkbox]").change(function() {
+        var key = $(this).id;
+        Cookies.set(key, $(elem).prop('checked'),  { expires: 3650 })
+      });
+    </script>
   </body>
 </html>

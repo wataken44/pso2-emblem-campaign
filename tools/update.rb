@@ -5,8 +5,11 @@
 
 require 'date'
 require 'erb'
+require 'json'
 require 'open-uri'
 require 'optparse'
+
+BASE_DIR = File.absolute_path(File.dirname($0) + "/../") + "/"
 
 def main()
 
@@ -26,7 +29,9 @@ def main()
     end
 
     start, goals = get_data(url)
-    render_html(start, goals, auto, url)
+    if is_updated(start, goals, url)
+        render_html(start, goals, auto, url)
+    end
 end
 
 def get_latest_url()
@@ -63,10 +68,37 @@ def get_data(url)
     return [start, goals]
 end
 
-def render_html(start, goals, auto, url)
-    base_dir = File.absolute_path(File.dirname($0) + "/../") + "/"
+def is_updated(start, goals, url)
+    ret = false
+    fn = BASE_DIR + "/cache.json"
 
-    tfn = base_dir + "tools/index.html.erb"
+    if !File.exists?(fn)
+        ret = true
+    else
+        fp = open(fn)
+        js = JSON.parse(fp.read)
+        fp.close
+        if start != js["start"] || goals != js["goals"] || url != js["url"]
+            ret = true
+        end
+    end
+
+    data = {
+        "start" => start,
+        "goals" => goals,
+        "url" => url,
+    }
+    
+    fp = open(fn, "w")
+    fp.write(JSON.pretty_generate(data))
+    fp.close
+    
+    return true
+end
+    
+def render_html(start, goals, auto, url)
+
+    tfn = BASE_DIR + "tools/index.html.erb"
     tfp = open(tfn)
     template_str = tfp.read()
     tfp.close
@@ -76,14 +108,13 @@ def render_html(start, goals, auto, url)
 
     now = DateTime.now.to_s
     
-    ofp1 = open(base_dir + "index.html", "w")
+    ofp1 = open(BASE_DIR + "index.html", "w")
     ofp1.write(template.result(binding))
     ofp1.close
 
-    ofp2 = open(base_dir + ("archive/%s.html" % start), "w")
+    ofp2 = open(BASE_DIR + ("archive/%s.html" % start), "w")
     ofp2.write(template.result(binding))
     ofp2.close
-
 end
 
 if __FILE__ == $0 then

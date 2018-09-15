@@ -42,7 +42,7 @@
       </div>
       <div class="pure-g">
         <div class="pure-u-1">
-          <p><a href="http://pso2.jp/players/news/22289/">http://pso2.jp/players/news/22289/</a> から2018-09-15T06:17:48+00:00に生成しました。</p>
+          <p><a href="http://pso2.jp/players/news/22289/">http://pso2.jp/players/news/22289/</a> から2018-09-15T06:23:58+00:00に生成しました。</p>
           <p>Cookieを利用して結果を保存しています。</p>
         </div>
       </div>
@@ -50,7 +50,7 @@
     <script>
       $(document).ready(function() {
         $("input[type=checkbox]").each(function(index, elem){
-          var key = $(elem).id;
+          var key = $(elem).attr('id');
           if(Cookies.get(key) == 'true' ) {
             $(elem).prop('checked', true);
           }
@@ -58,7 +58,7 @@
       });
 
       $("input[type=checkbox]").change(function() {
-        var key = $(this).id;
+        var key = $(this).attr('id');
         Cookies.set(key, $(this).prop('checked'),  { expires: 3650 })
       });
     </script>

@@ -43,7 +43,7 @@
     <script>
       $(document).ready(function() {
         $("input[type=checkbox]").each(function(index, elem){
-          var key = $(elem).id;
+          var key = $(elem).attr('id');
           if(Cookies.get(key) == 'true' ) {
             $(elem).prop('checked', true);
           }
@@ -51,7 +51,7 @@
       });
 
       $("input[type=checkbox]").change(function() {
-        var key = $(this).id;
+        var key = $(this).attr('id');
         Cookies.set(key, $(this).prop('checked'),  { expires: 3650 })
       });
     </script>

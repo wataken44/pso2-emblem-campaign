@@ -39,7 +39,7 @@ def get_latest_url()
     body = fp.read()
     fp.close()
 
-    ptn = Regexp.compile('<a href="([^"]+)">.*王者の紋章[^<]*キャンペーン[^<]*</span>')
+    ptn = Regexp.compile('<a href="([^"]+)">.*の紋章[^<]*キャンペーン[^<]*</span>')
     links = body.scan(ptn)
 
     if links.size > 0

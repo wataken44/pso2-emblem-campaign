@@ -64,8 +64,15 @@ def get_data(url)
     end
         
     goals = body.scan(goal_ptn)
-    
+
+    if goals.size > 0 then
+        return [start, goals]
+    end
+
+    goal_ptn = Regexp.compile("<span[^>]*>([^<]*)</span><span[^>]*>([^<]*)</span></td><td>(.*)</td>")
+    goals = body.scan(goal_ptn)
     return [start, goals]
+    
 end
 
 def is_updated(start, goals, url)

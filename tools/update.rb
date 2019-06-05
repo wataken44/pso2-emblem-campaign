@@ -71,6 +71,11 @@ def get_data(url)
 
     goal_ptn = Regexp.compile("<span[^>]*>([^<]*)</span><span[^>]*>([^<]*)</span></td><td>(.*)</td>")
     goals = body.scan(goal_ptn)
+    goals = goals.map{|g|
+        next [g[0].force_encoding("utf-8"),
+              g[1].force_encoding("utf-8"),
+              g[2].force_encoding("utf-8").gsub(/<[^>]*>/,"")]
+    }
     return [start, goals]
     
 end

@@ -51,7 +51,7 @@ end
 
 def get_data(url)
     fp = open(url)
-    body = fp.read().gsub(/<br *\/*>/," ")
+    body = fp.read().gsub(/<br *\/*>\n*/," ")
     fp.close
 
     start_ptn = Regexp.compile('<span class="period-start"><span class="year">(\d+)</span>[^<]*<span class="mouth">(\d+)</span>[^<]*<span class="day">(\d+)</span>')

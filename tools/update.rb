@@ -23,12 +23,11 @@ def main()
     argv = opt.parse(ARGV)
     
     if auto
-        url = get_latest_url()
+        start, goals, url = get_latest_data()
     else
-        url = argv[0]
+        start, goals, url = get_data(argv[0])
     end
 
-    start, goals = get_data(url)
     if is_updated(start, goals, url)
         render_html(start, goals, auto, url)
     end
@@ -42,11 +41,14 @@ def get_latest_url()
     ptn = Regexp.compile('<a href="([^"]+)">.*の紋章[^<]*キャンペーン[^<]*</span>')
     links = body.scan(ptn)
 
-    if links.size > 0
-        return links[0][0]
+    links.map{|t| next t[0]}.each do |link|
+        start, goals = get_data(link)
+        if goals.size > 0 then
+            return start, goals, link
+        end
     end
 
-    return nil
+    return nil, nil, nil
 end
 
 def get_data(url)
@@ -76,8 +78,7 @@ def get_data(url)
               g[1].force_encoding("utf-8"),
               g[2].force_encoding("utf-8").gsub(/<[^>]*>/,"")]
     }
-    return [start, goals]
-    
+    return [start, goals, url]
 end
 
 def is_updated(start, goals, url)

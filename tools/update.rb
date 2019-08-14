@@ -42,9 +42,9 @@ def get_latest_data()
     links = body.scan(ptn)
 
     links.map{|t| next t[0]}.each do |link|
-        start, goals = get_data(link)
+        start, goals, url = get_data(link)
         if goals.size > 0 then
-            return start, goals, link
+            return start, goals, url
         end
     end
 
@@ -68,7 +68,7 @@ def get_data(url)
     goals = body.scan(goal_ptn)
 
     if goals.size > 0 then
-        return [start, goals]
+        return [start, goals, url]
     end
 
     goal_ptn = Regexp.compile("<span[^>]*>([^<]*)</span><span[^>]*>([^<]*)</span></td><td>(.*)</td>")

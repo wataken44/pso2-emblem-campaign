@@ -33,7 +33,7 @@ def main()
     end
 end
 
-def get_latest_url()
+def get_latest_data()
     fp = open('http://pso2.jp/players/news/event/')
     body = fp.read()
     fp.close()

@@ -28,6 +28,10 @@ def main()
         start, goals, url = get_data(argv[0])
     end
 
+    if goals.size == 0 then
+        return
+    end
+    
     if is_updated(start, goals, url)
         render_html(start, goals, auto, url)
     end
@@ -48,7 +52,7 @@ def get_latest_data()
         end
     end
 
-    return nil, nil, nil
+    return nil, [], nil
 end
 
 def get_data(url)
@@ -78,7 +82,9 @@ def get_data(url)
               g[1].force_encoding("utf-8"),
               g[2].force_encoding("utf-8").gsub(/<[^>]*>/,"")]
     }
-    return [start, goals, url]
+    if goals.size > 0 then
+        return [start, goals, url]
+    end
 end
 
 def is_updated(start, goals, url)

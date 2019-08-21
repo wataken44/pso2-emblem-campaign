@@ -85,6 +85,8 @@ def get_data(url)
     if goals.size > 0 then
         return [start, goals, url]
     end
+
+    return nil, [], nil
 end
 
 def is_updated(start, goals, url)
